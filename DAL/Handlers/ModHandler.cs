@@ -1,5 +1,6 @@
 ﻿using DAL.Interfaces;
 using DTO;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,7 +19,7 @@ namespace DAL.Handlers
 
         public List<MouseMod> GetAll()
         {
-            return _context.Mods.ToList();
+            return _context.Mods.Include(m => m.Base).ToList();
         }
 
         public void AddMod(MouseMod mod)

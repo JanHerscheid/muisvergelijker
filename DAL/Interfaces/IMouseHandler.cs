@@ -6,5 +6,6 @@ namespace DAL.Interfaces
     {
         List<Mouse> GetAll();
         void AddMouse(Mouse mouse);
+        Mouse getById(int id);
     }
 }

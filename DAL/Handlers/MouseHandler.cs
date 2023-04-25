@@ -21,8 +21,8 @@ namespace DAL.Handlers
             return _context.Mice.ToList();
         }
 
-        public Mouse getById() {
-            return null;
+        public Mouse getById(int id) {
+            return _context.Mice.First(x => x.Id == id);
         }
 
         public void AddMouse(Mouse mouse) {
