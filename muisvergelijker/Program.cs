@@ -24,6 +24,14 @@ builder.Services.AddDbContext<DataContext>(options =>
     options.UseMySql("Server=studmysql01.fhict.local;Uid=dbi406978;Database=dbi406978;Pwd=Sudblamzud2;", ServerVersion.AutoDetect("Server=studmysql01.fhict.local;Uid=dbi406978;Database=dbi406978;Pwd=Sudblamzud2;"));
 });
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowOrigin",
+        builder => builder.WithOrigins("http://127.0.0.1:5173")
+                          .AllowAnyHeader()
+                          .AllowAnyMethod());
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -32,6 +40,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseCors("AllowOrigin");
 
 app.UseHttpsRedirection();
 

@@ -1,6 +1,7 @@
 ﻿using DTO;
 using Logic.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using muisvergelijker.Models;
 
 namespace muisvergelijker.Controllers
 {
@@ -21,9 +22,9 @@ namespace muisvergelijker.Controllers
         }
 
         [HttpPost]
-        public void AddMouse(int basemouse, int weight, string comments)
+        public void AddMouse(ModRequest mod)
         {
-            _modLogic.AddMod(basemouse, weight, comments);
+            _modLogic.AddMod(mod.Basemouse, mod.Weight, mod.Comments);
         }
 
 
