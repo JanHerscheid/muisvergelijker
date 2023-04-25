@@ -14,7 +14,6 @@ namespace Logic
     public class MouseLogic : IMouseLogic
     {
         private IMouseHandler _mouseHandler;
-        private readonly DataContext _context;
         public MouseLogic(IMouseHandler mouseHandler)
         {
             _mouseHandler = mouseHandler;

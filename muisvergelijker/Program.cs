@@ -16,6 +16,8 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<IMouseHandler, MouseHandler>();
 builder.Services.AddScoped<IMouseLogic, MouseLogic>();
+builder.Services.AddScoped<IModHandler, ModHandler>();
+builder.Services.AddScoped<IModLogic, ModLogic>();
 
 builder.Services.AddDbContext<DataContext>(options =>
 {

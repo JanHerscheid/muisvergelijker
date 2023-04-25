@@ -8,25 +8,22 @@ using System.Threading.Tasks;
 
 namespace DAL.Handlers
 {
-    public class MouseHandler : IMouseHandler
+    public class ModHandler : IModHandler
     {
         private readonly DataContext _context;
-        public MouseHandler(DataContext dataContext)
+        public ModHandler(DataContext dataContext)
         {
             _context = dataContext;
         }
 
-        public List<Mouse> GetAll()
+        public List<MouseMod> GetAll()
         {
-            return _context.Mice.ToList();
+            return _context.Mods.ToList();
         }
 
-        public Mouse getById() {
-            return null;
-        }
-
-        public void AddMouse(Mouse mouse) {
-            _context.Mice.Add(mouse);
+        public void AddMod(MouseMod mod)
+        {
+            _context.Mods.Add(mod);
             _context.SaveChanges();
         }
     }

@@ -11,6 +11,7 @@ namespace DAL
     public class DataContext : DbContext
     {
         public DbSet<Mouse> Mice { get; set; }
+        public DbSet<MouseMod> Mods { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

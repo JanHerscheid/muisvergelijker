@@ -6,12 +6,11 @@ using System.Threading.Tasks;
 
 namespace DTO
 {
-    public class User
+    public class MouseMod
     {
         public int Id { get; set; }
-        public string Username { get; set; }
-        public string Password { get; set; }
-        public List<Mouse> OwnedMice { get; set; }
-
+        public Mouse Base { get; set; }
+        public int Weight { get; set; }
+        public string Comments { get; set; }
     }
 }
