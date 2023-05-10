@@ -27,4 +27,4 @@ jobs:
           git config user.name $GIT_USER_NAME
           git config user.email $GIT_USER_EMAIL
           git merge --no-ff ${{ github.event.head.ref }} -m "Merge ${{ github.event.head.ref }} into development"
-          git push origin development --quiet "${{ secrets.GIT_TOKEN }}"
+          git push origin refs/heads/development --quiet "${{ secrets.GIT_TOKEN }}"
