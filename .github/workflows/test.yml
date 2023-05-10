@@ -13,6 +13,17 @@ jobs:
         with:
           dotnet-version: '6.0.x'
       - name: Build and test
+        working-directory: ./muisvergelijker
         run: |
           dotnet build
           dotnet test
+      - name: Merge changes
+        if: success()
+        env:
+          GIT_USER_NAME: ${{ secrets.GIT_USER_NAME }}
+          GIT_USER_EMAIL: ${{ secrets.GIT_USER_EMAIL }}
+        run: |
+          git config user.name $GIT_USER_NAME
+          git config user.email $GIT_USER_EMAIL
+          git merge --no-ff ${{ github.event.head.ref }} -m "Merge ${{ github.event.head.ref }} into development"
+          git push origin development
