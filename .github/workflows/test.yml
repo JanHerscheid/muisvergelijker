@@ -20,7 +20,7 @@ jobs:
       - name: Merge changes
         if: success()
         env:
-          GIT_USER_NAME: ${{ secrets.GIT_USER_NAME }}
+          GIT_USER_NAME: JanHerscheid
           GIT_USER_EMAIL: ${{ secrets.GIT_USER_EMAIL }}
         run: |
           git config user.name $GIT_USER_NAME
