@@ -39,5 +39,19 @@ namespace Logic
                 Comments = comments
             });
         }
+
+        public List<MouseMod> getModsByUser(int uid) { 
+            return _modHandler.getModsByUser(uid);
+        }
+        public void DeleteMod(int modId) { 
+            _modHandler.DeleteMod(getModById(modId));
+        }
+        public MouseMod getModById(int id) { 
+            return _modHandler.getModById(id);
+        }
+        public void UpdateMod(MouseMod mod)
+        {
+            _modHandler.UpdateMod(mod);
+        }
     }
 }

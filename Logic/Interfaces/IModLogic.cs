@@ -6,5 +6,9 @@ namespace Logic.Interfaces
     {
         void AddMod(int basemouse, int weight, string comments);
         List<MouseMod> GetAll();
+        List<MouseMod> getModsByUser(int uid);
+        void DeleteMod(int modId);
+        MouseMod getModById(int id);
+        void UpdateMod(MouseMod mod);
     }
 }
