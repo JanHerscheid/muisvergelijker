@@ -3,20 +3,20 @@ name: CI
 on:
   push:
     branches: [ development ]
+
 jobs:
   test:
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v2
-      - name: Setup .NET
-        uses: actions/setup-dotnet@v1
-        with:
-          dotnet-version: '6.0.x'
-      - name: Build and test
-        working-directory: ./muisvergelijker
+
+      #Ik wil nog toevoegen dat hij ook mijn container update elke keer als ik een change push. Is dit handig ?
+      - name: Run Docker container
         run: |
-          dotnet build
-          dotnet test
+          docker pull janherscheid/muisvergelijker:1.0
+          docker run janherscheid/muisvergelijker:1.0
+
       - name: Merge changes
         if: success()
         env:
