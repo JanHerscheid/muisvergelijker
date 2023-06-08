@@ -19,7 +19,7 @@ WORKDIR /src/muisvergelijker
 RUN dotnet restore -v d
 RUN dotnet publish -c Release -o out
 
-# Build runtime image
+# Build image
 FROM mcr.microsoft.com/dotnet/aspnet:6.0
 WORKDIR /App
 COPY --from=build-env /src/muisvergelijker/out .
