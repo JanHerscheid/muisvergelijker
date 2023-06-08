@@ -27,7 +27,7 @@ namespace Logic
             return mods;
         }
 
-        public void AddMod(int basemouse, int weight, string comments)
+        public void AddMod(int basemouse, int weight, string comments, string userid)
         {
             //get mouse from basemouse (dit is de id van de muis)
             Mouse Base = _mouseHandler.getById(basemouse);
@@ -36,8 +36,23 @@ namespace Logic
             {
                 Base = Base,
                 Weight = weight,
-                Comments = comments
+                Comments = comments,
+                auth0Id = userid
             });
+        }
+
+        public List<MouseMod> getModsByUser(string uid) { 
+            return _modHandler.getModsByUser(uid);
+        }
+        public void DeleteMod(int modId) { 
+            _modHandler.DeleteMod(getModById(modId));
+        }
+        public MouseMod getModById(int id) { 
+            return _modHandler.getModById(id);
+        }
+        public void UpdateMod(MouseMod mod)
+        {
+            _modHandler.UpdateMod(mod);
         }
     }
 }
