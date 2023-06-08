@@ -29,9 +29,9 @@ namespace DAL.Handlers
             _context.SaveChanges();
         }
 
-        public List<MouseMod> getModsByUser(int uid)
+        public List<MouseMod> getModsByUser(string uid)
         {
-            return _context.Mods.Where(x => x.userId == uid).ToList();
+            return _context.Mods.Where(x => x.auth0Id == uid).Include(m => m.Base).ToList();
         }
 
         public MouseMod getModById(int id)

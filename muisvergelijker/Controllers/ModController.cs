@@ -24,14 +24,14 @@ namespace muisvergelijker.Controllers
         [HttpPost]
         public void AddMod(ModRequest mod)
         {
-            _modLogic.AddMod(mod.Basemouse, mod.Weight, mod.Comments);
+            _modLogic.AddMod(mod.Basemouse, mod.Weight, mod.Comments, mod.UserId);
         }
 
         [HttpGet]
         [Route("user/{id}")]
-        public List<MouseMod> getModsByUser(int uid)
+        public List<MouseMod> getModsByUser(string id)
         {
-            return _modLogic.getModsByUser(uid);
+            return _modLogic.getModsByUser(id);
         }
 
         [HttpDelete]

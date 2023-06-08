@@ -13,5 +13,6 @@ namespace DTO
         public string Brand { get; set; }
         public int Weight { get; set; }
         public string Sensor { get; set; }
+        public string Image { get; set; }
     }
 }
