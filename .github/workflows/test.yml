@@ -2,28 +2,50 @@ name: CI
 
 on:
   push:
-    branches: [ development ]
+    branches: 
+      - main
+      - development
+  pull_request:
+    branches: 
+      - main
+      - development
+
+env:
+  DOTNET_VERSION: '6.0.x'
+  IMAGE_NAME: 'janherscheid/muisvergelijker'
 
 jobs:
-  test:
+  build-and-test:
     runs-on: ubuntu-latest
 
+    services:
+      docker:
+        image: docker:stable
+        options: -T
+        credentials:
+          username: ${{ secrets.DOCKER_HUB_USERNAME }}
+          password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+
     steps:
-      - uses: actions/checkout@v2
+    - name: Checkout code
+      uses: actions/checkout@v2
+      
+    - name: Set up .NET SDK
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: ${{ env.DOTNET_VERSION }}
 
-      #Ik wil nog toevoegen dat hij ook mijn container update elke keer als ik een change push. Is dit handig ?
-      - name: Run Docker container
-        run: |
-          docker pull janherscheid/muisvergelijker:1.1
-          docker run janherscheid/muisvergelijker:1.1
+    - name: Build project
+      run: dotnet build muisvergelijker/muisvergelijker.sln --configuration Release
 
-      - name: Merge changes
-        if: success()
-        env:
-          GIT_USER_NAME: ${{ secrets.GIT_USER_NAME }}
-          GIT_USER_EMAIL: ${{ secrets.GIT_USER_EMAIL }}
-        run: |
-          git config user.name $GIT_USER_NAME
-          git config user.email $GIT_USER_EMAIL
-          git merge --no-ff ${{ github.event.head.ref }} -m "Merge ${{ github.event.head.ref }} into development"
-          git push origin refs/heads/development --quiet "${{ secrets.GIT_TOKEN }}"
+    - name: Run tests
+      run: dotnet test muisvergelijker/muisvergelijker.sln --no-build --verbosity normal
+
+    - name: Login to Docker Hub
+      run: echo "${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}" | docker login -u "${{ secrets.DOCKER_HUB_USERNAME }}" --password-stdin
+
+    - name: Build Docker image
+      run: docker build -t ${{ env.IMAGE_NAME }}:latest .
+
+    - name: Push Docker image
+      run: docker push ${{ env.IMAGE_NAME }}:latest
