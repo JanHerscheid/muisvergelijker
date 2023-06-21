@@ -2,6 +2,8 @@
 This is the readme for the backend of my project muisvergelijker. This backend api is written in the .net 6 framework.
 In this readme I will explain how to use this api. 
 
+The portfolio of my semester can be accessed using the following [link](https://jans-organization-1.gitbook.io/portfolio-jan-herscheid/).
+
 ## 1. Prerequisites
 - **.NET 6 SDK** As this is a .NET 6 project, the .NET 6 SDK is required to run the api. The .NET 6 SDK can be acquired [here](https://dotnet.microsoft.com/en-us/download/dotnet/6.0).
 - **Cisco AnyConnect** Cisco AnyConnect is required to connect to the database. Get it [here](https://www.cisco.com/c/en/us/support/security/anyconnect-secure-mobility-client-v4-x/model.html).
